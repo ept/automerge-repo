@@ -1,4 +1,5 @@
 import DocHandle from './DocHandle.js'
+import * as Automerge from '../vendor/automerge-js/index.js'
 
 export default class Repo extends EventEmitter3 {
   handles = {}

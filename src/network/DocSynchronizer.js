@@ -2,6 +2,9 @@
  * Given a handle to an Automerge document,
  * receive & dispatch sync messages to bring it in-line with all other peers' versions.
  */
+
+import * as Automerge from '../../vendor/automerge-js/index.js'
+
 export default class DocSynchronizer extends EventEmitter3 {
   handle
   // we track this separately from syncStates because you might have more syncStates than peers
