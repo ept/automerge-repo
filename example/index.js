@@ -1,6 +1,23 @@
 import '../vendor/localforage.js'
 import BrowserRepo from '../src/BrowserRepo.js'
 
+import init, * as WASM from '../vendor/automerge-wasm/index.js'
+import * as Automerge from '../vendor/automerge-js/index.js'
+
+init().then((api) => {
+  Automerge.use(api)
+
+  // want to create low level docs?  Here you go
+  let doc = WASM.create()
+  doc.put("/","key1","val1")
+  console.log("WASM",doc.materialize("/"))
+
+  // want to create normal docs
+  let doc2 = Automerge.init()
+  doc2 = Automerge.change(doc2, (d) => d.key2 = "val2")
+  console.log("AUTOMERGE",Automerge.toJS(doc2))
+})
+
 const repo = BrowserRepo()
 
 async function getRootDocument() {
